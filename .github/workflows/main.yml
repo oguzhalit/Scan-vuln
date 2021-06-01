@@ -1,31 +1,13 @@
-- name: Sysdig Secure Inline Scan
-  # You may pin to the exact commit or the version.
-  # uses: sysdiglabs/scan-action@e987fddce3e5dd5122fa4af4488fd65cb2b08cd6
-  uses: sysdiglabs/scan-action@v3.0.1
-  with:
-    # Tag of the image to analyse.
-    image-tag: 
-    # API token for Sysdig Scanning auth.
-    sysdig-secure-token: 
-    # Github App token to publish the checks. By default it will use "github.token value". See https://docs.github.com/en/free-pro-team@latest/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
-    github-token: # default is ${{ github.token }}
-    # Sysdig Secure URL (ex: "https://secure-sysdig.com").
-    sysdig-secure-url: # optional, default is https://secure.sysdig.com
-    # Skip TLS verification when calling secure endpoints.
-    sysdig-skip-tls: # optional
-    # Path to Dockerfile (ex: "./Dockerfile").
-    dockerfile-path: # optional
-    # Don't fail the execution of this action even if the scan result is FAILED.
-    ignore-failed-scan: # optional
-    # If specified, where should we scan the image from. Possible values:
-
-    input-type: # default is pull
-    # Path to the tar file or OCI layout directory.
-    input-path: # optional
-    # Run the scan container with this username or UID.
-
-    run-as-user: # optional
-    # Additional parameters added to the secure-inline-scan container execution.
-    extra-parameters: # optional
-    # Additional parameters added to the docker command when executing the secure-inline-scan container execution.
-    extra-docker-parameters: # optional
+on:
+  push:
+    branches: 
+    - main
+jobs:
+  scan:
+    runs-on: ubuntu:latest
+      steps:
+      - name: test
+      
+      
+  
+    
