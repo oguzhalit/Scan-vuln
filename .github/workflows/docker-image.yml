@@ -32,10 +32,13 @@ jobs:
         ignore: 'DL3007, DL3008'
         failure-threshold: 'warning'
         
-    - name: Check Dockerize app
-      run: |
-        docker run -it --name  test2  php-demo ls >/dev/null || curl -Is localhost >/dev/null && echo 'Succes' || echo 'Warning'
-
+    - name: Docker Run Action
+      uses: addnab/docker-run-action@v3
+      with:
+        image: php-demo
+        options: -t
+        shell: curl -Is localhost >/dev/null && echo 'Succes' || echo 'Warning'
+        
     - name: Scan Container with trivy
       uses: aquasecurity/trivy-action@0.0.18
       with:
