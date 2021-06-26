@@ -36,7 +36,7 @@ jobs:
       run: |
         docker run --rm -it --name  test -d php-demo
         sleep 1
-        docker exec -it test curl -Is localhost >/dev/null && echo 'working' || echo 'warning'
+        docker exec -itT test curl -Is localhost >/dev/null && echo 'working' || echo 'warning'
 
         
     - name: Scan Container with trivy
@@ -47,6 +47,7 @@ jobs:
         exit-code: '1'
         ignore-unfixed: true
         vuln-type: 'os,library'
+        severity: 'UNKOWN'
         
         
   
