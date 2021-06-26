@@ -7,6 +7,6 @@
 <?php
 echo "Bu bir php sayfası denemesidir. Oguz halit sak tarafından deneniyor";
 ?>
-
+<p> Ornekler devam ediyor </p>
 </body>
 </html>
