@@ -33,11 +33,13 @@ jobs:
         failure-threshold: 'warning'
         
     - name: Docker Run Action
-      uses: addnab/docker-run-action@v3
+      run: |
+        docker run --name test2 -d -p 83:80 php-demo 
+    
+    - name: curl
+      uses: wei/curl@v1
       with:
-        image: php-demo
-        options: -t
-        shell: 'curl -Is localhost >/dev/null && echo "Succes" || echo "Warning"'
+        args: http://localhost:83
         
     - name: Scan Container with trivy
       uses: aquasecurity/trivy-action@0.0.18
