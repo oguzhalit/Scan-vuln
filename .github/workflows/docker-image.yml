@@ -24,11 +24,13 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag php-demo
       
-    - name: Docker run
-      run: docker run --name test2 -d -p 83:80 php-demo
-      
-    - name: App Check
-      run: curl -Is localhost:83 >/dev/null && echo 'başarılı' || echo 'hatalı'
+    - name: Docker Run Action
+      uses: addnab/docker-run-action@v3
+      with:
+        image: php-demo
+        options: --rm -it --name test
+        shell: bash
+        run: ls >/dev/null || curl -Is localhost >/dev/null && echo 'başarılı' || echo 'hatalı'
       
     - name: Hadolint Action
       uses: hadolint/hadolint-action@v1.5.0
