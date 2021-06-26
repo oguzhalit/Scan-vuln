@@ -30,7 +30,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: php-demo
-        shell: |
+        run: |
           curl -Is localhost > /dev/null && echo 'working' || echo 'error'
         
     - name: Scan Container with trivy
