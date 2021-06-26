@@ -37,7 +37,7 @@ jobs:
       with:
         image: php-demo
         options: -t
-        shell: curl -Is localhost >/dev/null && echo 'Succes' || echo 'Warning'
+        shell: 'curl -Is localhost >/dev/null && echo "Succes" || echo "Warning"'
         
     - name: Scan Container with trivy
       uses: aquasecurity/trivy-action@0.0.18
