@@ -1,0 +1,50 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag php-demo
+      
+      
+    - name: Hadolint Action
+      uses: hadolint/hadolint-action@v1.5.0
+      with:
+        dockerfile: Dockerfile
+        ignore: 
+          - 'DL3007'
+          - 'DL3008'
+        failure-threshold: 'warning'
+        
+    - name: Check Docker 
+      uses: addnab/docker-run-action@v3
+      with:
+        image: php-demo
+        shell: |
+          curl -Is localhost > /dev/null && echo 'working' || echo 'error'
+        
+    - name: Scan Container with trivy
+      uses: aquasecurity/trivy-action@0.0.18
+      with:
+        image-ref: 'php-demo'
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL'
+        
+        
+  
+          
