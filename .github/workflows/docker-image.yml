@@ -14,7 +14,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
+    - name: Install Apache
+      run: |
+        sudo apt update
+        sudo apt install apache2
+        echo "Install Apache2"
+        
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag php-demo
       
@@ -30,8 +36,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: php-demo
-        run: |
-          curl -Is localhost > /dev/null && echo 'working' || echo 'error'
+        run: curl -Is http://localhost > /dev/null && echo 'working' || echo 'error'
         
     - name: Scan Container with trivy
       uses: aquasecurity/trivy-action@0.0.18
