@@ -34,7 +34,7 @@ jobs:
         
     - name: Check Dockerize app
       run: |
-        docker run --rm -it --name  test2  php-demo ls >/dev/null || curl -Is localhost >/dev/null && echo 'Succes' || echo 'Warning'
+        docker run -it --name  test2  php-demo ls >/dev/null || curl -Is localhost >/dev/null && echo 'Succes' || echo 'Warning'
 
     - name: Scan Container with trivy
       uses: aquasecurity/trivy-action@0.0.18
