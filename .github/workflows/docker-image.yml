@@ -28,7 +28,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: php-demo
-        options: --rm -it --name test
+        options: --rm -i --name test
         shell: bash
         run: ls >/dev/null || curl -Is localhost >/dev/null && echo 'başarılı' || echo 'hatalı'
       
