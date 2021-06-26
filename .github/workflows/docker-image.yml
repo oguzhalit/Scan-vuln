@@ -36,7 +36,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: php-demo
-        run: curl -Is http://localhost > /dev/null && echo 'working' || echo 'error'
+        run: curl localhost
         
     - name: Scan Container with trivy
       uses: aquasecurity/trivy-action@0.0.18
@@ -46,7 +46,6 @@ jobs:
         exit-code: '1'
         ignore-unfixed: true
         vuln-type: 'os,library'
-        severity: 'CRITICAL'
         
         
   
