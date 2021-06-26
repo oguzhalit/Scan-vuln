@@ -24,6 +24,11 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag php-demo
       
+    - name: Docker run
+      run: docker run --name test2 -d -p 83:80 php-demo
+      
+    - name: App Check
+      run: curl -Is localhost:83 >/dev/null && echo 'başarılı' || echo 'hatalı'
       
     - name: Hadolint Action
       uses: hadolint/hadolint-action@v1.5.0
@@ -31,15 +36,6 @@ jobs:
         dockerfile: Dockerfile
         ignore: 'DL3007, DL3008'
         failure-threshold: 'warning'
-        
-    - name: Docker Run Action
-      run: |
-        docker run --name test2 -d -p 83:80 php-demo 
-    
-    - name: curl
-      uses: wei/curl@v1
-      with:
-        args: http://localhost:83
         
     - name: Scan Container with trivy
       uses: aquasecurity/trivy-action@0.0.18
